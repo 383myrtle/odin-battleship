@@ -7,4 +7,14 @@ export default [
   {languageOptions: { globals: globals.browser }},
   pluginJs.configs.recommended,
   eslintConfigPrettier,
+  {
+    "overrides": [
+      {
+        "files": ["tests/**/*"],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
+  },
 ];
