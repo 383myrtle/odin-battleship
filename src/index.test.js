@@ -95,4 +95,10 @@ describe("Receive attack tests", () => {
     gameboard.receiveAttack(4, 6);
     expect(gameboard.hits[4][6]).toBe(1);
   });
+
+  test("Throws error for invalid coordinates", () => {
+    expect(() => gameboard.receiveAttack(10, 5)).toThrow(
+      "Error. Ship out of bounds of board",
+    );
+  });
 });

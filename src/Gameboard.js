@@ -27,7 +27,7 @@ export class Gameboard {
   }
 
   place(ship, rowStart, colStart, orientation) {
-    if (!(rowStart >= 0 && colStart >= 0)) {
+    if (!this.isValidCoords(rowStart, colStart)) {
       throw this.outOfBoundsError;
     }
     switch (orientation) {
@@ -53,10 +53,21 @@ export class Gameboard {
   }
 
   receiveAttack(row, col) {
+    if (!this.isValidCoords(row, col)) {
+      throw this.outOfBoundsError;
+    }
     if (this.board[row][col] !== null) {
       this.board[row][col].hit();
     }
     this.hits[row][col] = 1;
   }
+
+  isValidCoords(row, col) {
+    if (row < 0 || col < 0 || row > 9 || col > 9) {
+      return false;
+    }
+    return true;
+  }
+
   outOfBoundsError = new Error("Error. Ship out of bounds of board");
 }
