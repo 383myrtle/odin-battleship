@@ -24,7 +24,7 @@ describe("Ship methods", () => {
   });
 });
 
-describe("Gameboard methods", () => {
+describe("Ship placement tests", () => {
   let gameboard;
   let ship;
   beforeEach(() => {
@@ -76,5 +76,23 @@ describe("Gameboard methods", () => {
     expect(() => gameboard.place(ship, 0, 8, "diagonal")).toThrow(
       /orientation/,
     );
+  });
+});
+
+describe("Receive attack tests", () => {
+  const gameboard = new Gameboard();
+  const ship = new Ship(5);
+  gameboard.place(ship, 0, 0, "horizontal");
+
+  test("Receives attack on ship", () => {
+    expect(ship.numHits).toBe(0);
+    gameboard.receiveAttack(0, 3);
+    expect(ship.numHits).toBe(1);
+    expect(gameboard.hits[0][3]).toBe(1);
+  });
+
+  test("Receives missed attack", () => {
+    gameboard.receiveAttack(4, 6);
+    expect(gameboard.hits[4][6]).toBe(1);
   });
 });

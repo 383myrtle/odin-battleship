@@ -12,6 +12,18 @@ export class Gameboard {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ];
+    this.hits = [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ];
   }
 
   place(ship, rowStart, colStart, orientation) {
@@ -40,5 +52,11 @@ export class Gameboard {
     }
   }
 
+  receiveAttack(row, col) {
+    if (this.board[row][col] !== null) {
+      this.board[row][col].hit();
+    }
+    this.hits[row][col] = 1;
+  }
   outOfBoundsError = new Error("Error. Ship out of bounds of board");
 }
