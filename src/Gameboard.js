@@ -24,6 +24,7 @@ export class Gameboard {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ];
+    this.ships = [];
   }
 
   place(ship, start_x, start_y, orientation) {
@@ -37,6 +38,9 @@ export class Gameboard {
         }
         for (let i = 0; i < ship.length; i++) {
           this.board[start_x][start_y + i] = ship;
+          if (!this.ships.includes(ship)) {
+            this.ships.push(ship);
+          }
         }
         break;
       case "horizontal":
@@ -45,6 +49,9 @@ export class Gameboard {
         }
         for (let i = 0; i < ship.length; i++) {
           this.board[start_x + i][start_y] = ship;
+          if (!this.ships.includes(ship)) {
+            this.ships.push(ship);
+          }
         }
         break;
       default:
@@ -60,6 +67,10 @@ export class Gameboard {
       this.board[x][y].hit();
     }
     this.hits[x][y] = 1;
+  }
+
+  allShipsSunk() {
+    return !this.ships.some((ship) => !ship.isSunk());
   }
 
   isValidCoords(row, col) {

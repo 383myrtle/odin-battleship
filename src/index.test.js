@@ -102,3 +102,24 @@ describe("Receive attack tests", () => {
     );
   });
 });
+
+describe("All ships sunk test", () => {
+  const gameboard = new Gameboard();
+  const ship1 = new Ship(1);
+  const ship2 = new Ship(2);
+  gameboard.place(ship1, 3, 1, "horizontal");
+  gameboard.place(ship2, 0, 0, "horizontal");
+
+  test("tracks ships on board", () => {
+    expect(gameboard.ships.includes(ship1)).toBe(true);
+    expect(gameboard.ships.includes(ship2)).toBe(true);
+  });
+
+  test("checks if all ships have sunk", () => {
+    expect(gameboard.allShipsSunk()).toBe(false);
+    ship1.hit();
+    ship2.hit();
+    ship2.hit();
+    expect(gameboard.allShipsSunk()).toBe(true);
+  });
+});
