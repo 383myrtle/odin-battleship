@@ -26,25 +26,25 @@ export class Gameboard {
     ];
   }
 
-  place(ship, rowStart, colStart, orientation) {
-    if (!this.isValidCoords(rowStart, colStart)) {
+  place(ship, start_x, start_y, orientation) {
+    if (!this.isValidCoords(start_x, start_y)) {
       throw this.outOfBoundsError;
     }
     switch (orientation) {
-      case "horizontal":
-        if (colStart + ship.length > 9) {
+      case "vertical":
+        if (start_y + ship.length > 9) {
           throw this.outOfBoundsError;
         }
         for (let i = 0; i < ship.length; i++) {
-          this.board[rowStart][colStart + i] = ship;
+          this.board[start_x][start_y + i] = ship;
         }
         break;
-      case "vertical":
-        if (rowStart + ship.length > 9) {
+      case "horizontal":
+        if (start_x + ship.length > 9) {
           throw this.outOfBoundsError;
         }
         for (let i = 0; i < ship.length; i++) {
-          this.board[rowStart + i][colStart] = ship;
+          this.board[start_x + i][start_y] = ship;
         }
         break;
       default:
@@ -52,14 +52,14 @@ export class Gameboard {
     }
   }
 
-  receiveAttack(row, col) {
-    if (!this.isValidCoords(row, col)) {
+  receiveAttack(x, y) {
+    if (!this.isValidCoords(x, y)) {
       throw this.outOfBoundsError;
     }
-    if (this.board[row][col] !== null) {
-      this.board[row][col].hit();
+    if (this.board[x][y] !== null) {
+      this.board[x][y].hit();
     }
-    this.hits[row][col] = 1;
+    this.hits[x][y] = 1;
   }
 
   isValidCoords(row, col) {
