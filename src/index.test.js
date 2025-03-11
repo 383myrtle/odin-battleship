@@ -40,9 +40,9 @@ describe("Ship placement tests", () => {
     expect(gameboard.board[2][0]).toBe(ship);
     expect(gameboard.board[3][0]).toBe(ship);
 
-    expect(gameboard.board[0][1]).toBe(null);
-    expect(gameboard.board[0][2]).toBe(null);
-    expect(gameboard.board[0][3]).toBe(null);
+    expect(gameboard.board[0][1]).toBeFalsy();
+    expect(gameboard.board[0][2]).toBeFalsy();
+    expect(gameboard.board[0][3]).toBeFalsy();
   });
 
   test("places ship vertically at given coordinates", () => {
@@ -52,9 +52,9 @@ describe("Ship placement tests", () => {
     expect(gameboard.board[0][2]).toBe(ship);
     expect(gameboard.board[0][3]).toBe(ship);
 
-    expect(gameboard.board[1][0]).toBe(null);
-    expect(gameboard.board[2][0]).toBe(null);
-    expect(gameboard.board[3][0]).toBe(null);
+    expect(gameboard.board[1][0]).toBeFalsy();
+    expect(gameboard.board[2][0]).toBeFalsy();
+    expect(gameboard.board[3][0]).toBeFalsy();
   });
 
   test("throws error if ship goes out of board bounds", () => {
@@ -86,6 +86,17 @@ describe("Ship placement tests", () => {
     const ship3 = new Ship(2);
     expect(() => gameboard.place(ship3, 3, 0, "vertical")).toThrow(Error);
     expect(gameboard.ships.length).toBe(1);
+  });
+
+  test("throws error if ship directly adjacent to another ship", () => {
+    gameboard.place(ship, 3, 1, "vertical");
+    const ship2 = new Ship(2);
+    expect(() => gameboard.place(ship2, 1, 2, "horizontal")).toThrow(Error);
+
+    gameboard.place(ship2, 5, 3, "horizontal");
+    const ship3 = new Ship(3);
+    expect(() => gameboard.place(ship3, 7, 2, "vertical")).toThrow(Error);
+
   });
 });
 

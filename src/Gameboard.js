@@ -34,13 +34,40 @@ export class Gameboard {
 
     switch (orientation) {
       case "vertical":
+        if (start_y - 1 >= 0) {
+          this.board[start_x][start_y - 1] = 0;
+        }
+        if (start_y + ship.length < 10) {
+          this.board[start_x][start_y + ship.length] = 0;
+        }
+
         for (let i = 0; i < ship.length; i++) {
           this.board[start_x][start_y + i] = ship;
+          if (start_x - 1 > 0) {
+            this.board[start_x - 1][start_y + i] = 0;
+          }
+          if (start_x + 1 < 10) {
+            this.board[start_x + 1][start_y + i] = 0;
+          }
         }
         break;
       case "horizontal":
+        if (start_x - 1 >= 0) {
+          this.board[start_x - 1][start_y] = 0;
+        }
+        if (start_x + ship.length < 10) {
+          this.board[start_x + ship.length][start_y] = 0;
+        }
+
         for (let i = 0; i < ship.length; i++) {
           this.board[start_x + i][start_y] = ship;
+
+          if (start_y - 1 > 0) {
+            this.board[start_x + i][start_y + -1] = 0;
+          }
+          if (start_y + 1 < 10) {
+            this.board[start_x + i][start_y + 1] = 0;
+          }
         }
         break;
       default:
