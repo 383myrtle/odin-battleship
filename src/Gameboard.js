@@ -28,30 +28,60 @@ export class Gameboard {
   }
 
   place(ship, start_x, start_y, orientation) {
-    if (!this.isValidCoords(start_x, start_y)) {
-      throw this.outOfBoundsError;
+    this.validateCoords(start_x, start_y);
+    this.validateShipPlacement(ship, start_x, start_y, orientation);
+    this.addShip(ship);
+
+    switch (orientation) {
+      case "vertical":
+        for (let i = 0; i < ship.length; i++) {
+          this.board[start_x][start_y + i] = ship;
+        }
+        break;
+      case "horizontal":
+        for (let i = 0; i < ship.length; i++) {
+          this.board[start_x + i][start_y] = ship;
+        }
+        break;
+      default:
+        throw new Error(`Error. Ship orientation ${orientation} not defined`);
     }
+  }
+
+  addShip(ship) {
+    if (!this.ships.includes(ship)) {
+      this.ships.push(ship);
+    }
+  }
+
+  validateShipPlacement(ship, start_x, start_y, orientation) {
     switch (orientation) {
       case "vertical":
         if (start_y + ship.length > 9) {
           throw this.outOfBoundsError;
         }
-        for (let i = 0; i < ship.length; i++) {
-          this.board[start_x][start_y + i] = ship;
-          if (!this.ships.includes(ship)) {
-            this.ships.push(ship);
-          }
+        if (
+          this.board[start_x]
+            .slice(start_y, start_y + ship.length)
+            .some((point) => point !== null)
+        ) {
+          throw new Error(
+            "Error. Ship cannot overlap with already placed ship.",
+          );
         }
         break;
       case "horizontal":
         if (start_x + ship.length > 9) {
           throw this.outOfBoundsError;
         }
-        for (let i = 0; i < ship.length; i++) {
-          this.board[start_x + i][start_y] = ship;
-          if (!this.ships.includes(ship)) {
-            this.ships.push(ship);
-          }
+        if (
+          this.board
+            .slice(start_x, start_x + ship.length)
+            .some((x) => x[start_y] !== null)
+        ) {
+          throw new Error(
+            "Error. Ship cannot overlap with already placed ship.",
+          );
         }
         break;
       default:
@@ -60,9 +90,7 @@ export class Gameboard {
   }
 
   receiveAttack(x, y) {
-    if (!this.isValidCoords(x, y)) {
-      throw this.outOfBoundsError;
-    }
+    this.validateCoords(x, y);
     if (this.board[x][y] !== null) {
       this.board[x][y].hit();
     }
@@ -73,11 +101,10 @@ export class Gameboard {
     return !this.ships.some((ship) => !ship.isSunk());
   }
 
-  isValidCoords(row, col) {
+  validateCoords(row, col) {
     if (row < 0 || col < 0 || row > 9 || col > 9) {
-      return false;
+      throw this.outOfBoundsError;
     }
-    return true;
   }
 
   outOfBoundsError = new Error("Error. Ship out of bounds of board");

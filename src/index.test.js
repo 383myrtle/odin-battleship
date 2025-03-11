@@ -77,6 +77,15 @@ describe("Ship placement tests", () => {
       /orientation/,
     );
   });
+
+  test("throws error if ship overlaps with existing ship", () => {
+    gameboard.place(ship, 3, 1, "vertical");
+    const ship2 = new Ship(3);
+    expect(() => gameboard.place(ship2, 2, 2, "horizontal")).toThrow(Error);
+    const ship3 = new Ship(2);
+    expect(() => gameboard.place(ship3, 3, 0, "vertical")).toThrow(Error);
+    expect(gameboard.ships.length).toBe(1);
+  });
 });
 
 describe("Receive attack tests", () => {
