@@ -12,7 +12,7 @@ export class Gameboard {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ];
-    this.hits = [
+    this.receivedAttacks = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -94,7 +94,7 @@ export class Gameboard {
     if (this.board[x][y] !== null) {
       this.board[x][y].hit();
     }
-    this.hits[x][y] = 1;
+    this.receivedAttacks[x][y] = 1;
   }
 
   allShipsSunk() {

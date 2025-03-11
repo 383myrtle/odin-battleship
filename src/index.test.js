@@ -98,12 +98,12 @@ describe("Receive attack tests", () => {
     expect(ship.numHits).toBe(0);
     gameboard.receiveAttack(3, 0);
     expect(ship.numHits).toBe(1);
-    expect(gameboard.hits[3][0]).toBe(1);
+    expect(gameboard.receivedAttacks[3][0]).toBe(1);
   });
 
   test("Receives missed attack", () => {
     gameboard.receiveAttack(4, 6);
-    expect(gameboard.hits[4][6]).toBe(1);
+    expect(gameboard.receivedAttacks[4][6]).toBe(1);
   });
 
   test("Throws error for invalid coordinates", () => {
