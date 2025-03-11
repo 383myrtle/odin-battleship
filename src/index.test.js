@@ -1,5 +1,6 @@
 import { Ship } from "./Ship.js";
 import { Gameboard } from "./Gameboard.js";
+import { Player } from "./Player.js";
 
 describe("Ship methods", () => {
   let ship;
@@ -130,5 +131,14 @@ describe("All ships sunk test", () => {
     ship2.hit();
     ship2.hit();
     expect(gameboard.allShipsSunk()).toBe(true);
+  });
+});
+
+describe("Player initialization tests", () => {
+  const player = new Player();
+
+  test("adds five ships to board", () => {
+    player.initializeRandomBoard();
+    expect(player.gameboard.ships.length).toBe(5);
   });
 });
