@@ -1,12 +1,12 @@
 import "./styles.css";
 import "./normalize.css";
 
-import { renderPlayerBoard, renderOpponentBoard } from "./DisplayController.js";
+import { renderBoard } from "./DisplayController.js";
 import { Player } from "./Player.js";
 
-const player = new Player();
+const player = new Player("Player 1");
 const opponent = new Player();
 player.initializeRandomBoard();
 opponent.initializeRandomBoard();
-renderPlayerBoard(player.gameboard);
-renderOpponentBoard(opponent.gameboard);
+renderBoard(player);
+renderBoard(opponent);
