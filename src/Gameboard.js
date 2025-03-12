@@ -118,7 +118,7 @@ export class Gameboard {
 
   receiveAttack(x, y) {
     this.validateCoords(x, y);
-    if (this.board[x][y] !== null) {
+    if (this.board[x][y]) {
       this.board[x][y].hit();
     }
     this.receivedAttacks[x][y] = 1;
