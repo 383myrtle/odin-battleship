@@ -7,5 +7,6 @@ import { Player } from "./Player.js";
 const player = new Player();
 const opponent = new Player();
 player.initializeRandomBoard();
+opponent.initializeRandomBoard();
 renderPlayerBoard(player.gameboard);
 renderOpponentBoard(opponent.gameboard);
