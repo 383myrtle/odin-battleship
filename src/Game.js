@@ -1,5 +1,6 @@
 import { Player } from "./Player.js";
 import { renderBoard } from "./DisplayController.js";
+import { handleAttacks } from "./EventHandlers.js";
 
 export class Game {
   constructor(playerName) {
@@ -18,11 +19,7 @@ export class Game {
   start() {
     const opponentGrid = document.querySelector(".opponent-board .board");
     opponentGrid.addEventListener("click", (e) => {
-      const cell = e.target.closest(".cell");
-      const x = parseInt(cell.dataset.x);
-      const y = parseInt(cell.dataset.y);
-      this.opponent.gameboard.receiveAttack(x, y);
-      renderBoard(this.opponent);
+      handleAttacks(e, this.opponent);
     });
   }
 }
