@@ -6,25 +6,27 @@ export class Player {
     this.gameboard = new Gameboard();
   }
 
-  orientations = ["horizontal", "vertical"];
-
   initializeRandomBoard() {
     for (let i = 1; i < 6; i++) {
       const ship = new Ship(i);
-      let x = Math.round(9 * Math.random());
-      let y = Math.round(9 * Math.random());
-      const orientation = this.orientations[Math.round(Math.random())];
-
+      let coords = this.getRandomCoords();
       let placed = false;
       while (!placed) {
         try {
-          this.gameboard.place(ship, x, y, orientation);
+          this.gameboard.place(ship, coords.x, coords.y, coords.orientation);
           placed = true;
         } catch {
-          x = Math.round(9 * Math.random());
-          y = Math.round(9 * Math.random());
+          coords = this.getRandomCoords();
         }
       }
     }
+  }
+
+  getRandomCoords() {
+    const orientations = ["horizontal", "vertical"];
+    let x = Math.round(9 * Math.random());
+    let y = Math.round(9 * Math.random());
+    const orientation = orientations[Math.round(Math.random())];
+    return { x, y, orientation };
   }
 }
