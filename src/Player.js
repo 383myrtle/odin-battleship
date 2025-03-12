@@ -2,8 +2,10 @@ import { Gameboard } from "./Gameboard.js";
 import { Ship } from "./Ship.js";
 
 export class Player {
-  constructor() {
+  constructor(name = "Computer") {
     this.gameboard = new Gameboard();
+    this.name = name;
+    this.type = this.name === "Computer" ? "opponent" : "player";
   }
 
   initializeRandomBoard() {
