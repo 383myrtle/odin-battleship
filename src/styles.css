@@ -15,8 +15,8 @@
   padding: 20px;
 }
 
-.player-board,
-.opponent-board {
+.player-container,
+.opponent-container {
   height: 100%;
   width: 100%;
   padding: 20px;
@@ -24,7 +24,8 @@
   justify-content: center;
 }
 
-.board {
+.player-board,
+.opponent-board {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);

@@ -17,7 +17,7 @@ export class Game {
   }
 
   async start() {
-    const opponentGrid = document.querySelector(".opponent-board .board");
+    const opponentGrid = document.querySelector(".opponent-board");
 
     let result = this.checkWin();
     while (result === null) {

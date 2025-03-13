@@ -1,5 +1,5 @@
 const renderBoard = (player) => {
-  const grid = document.querySelector(`.${player.type}-board .board`);
+  const grid = document.querySelector(`.${player.type}-board`);
   grid.textContent = "";
   for (let y = 9; y >= 0; y--) {
     for (let x = 0; x < 10; x++) {
