@@ -21,9 +21,9 @@ export class Game {
     let result = this.checkWin();
     while (!result.gameOver) {
       await this.playerAttack();
-      if (this.checkWin().gameOver){
-        break
-      };
+      if (this.checkWin().gameOver) {
+        break;
+      }
       this.randomOpponentAttack();
       result = this.checkWin();
     }
@@ -31,7 +31,7 @@ export class Game {
 
   playerAttack() {
     const opp = this.opponent;
-    
+
     return new Promise((resolve) => {
       opponentGrid.addEventListener("click", function handler(e) {
         handleAttack(e, opp);
@@ -42,16 +42,18 @@ export class Game {
   }
 
   randomOpponentAttack() {
-    let x = Math.round(9 * Math.random());
-    let y = Math.round(9 * Math.random());
+    setTimeout(() => {
+      let x = Math.round(9 * Math.random());
+      let y = Math.round(9 * Math.random());
 
-    while (this.player.gameboard.receivedAttacks[x][y]) {
-      x = Math.round(9 * Math.random());
-      y = Math.round(9 * Math.random());
-    }
+      while (this.player.gameboard.receivedAttacks[x][y]) {
+        x = Math.round(9 * Math.random());
+        y = Math.round(9 * Math.random());
+      }
 
-    this.player.gameboard.receiveAttack(x, y);
-    renderBoard(this.player);
+      this.player.gameboard.receiveAttack(x, y);
+      renderBoard(this.player);
+    }, 350);
   }
 
   checkWin() {
