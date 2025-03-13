@@ -57,13 +57,13 @@ export class Game {
   checkWin() {
     if (this.player.gameboard.allShipsSunk()) {
       return {
-        winner: this.player,
+        winner: this.opponent,
         gameOver: true,
       };
     }
     if (this.opponent.gameboard.allShipsSunk()) {
       return {
-        winner: this.opponent,
+        winner: this.player,
         gameOver: true,
       };
     }
