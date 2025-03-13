@@ -24,7 +24,7 @@ export class Game {
       if (this.checkWin().gameOver) {
         break;
       }
-      this.randomOpponentAttack();
+      await this.randomOpponentAttack();
       result = this.checkWin();
     }
   }
@@ -42,18 +42,22 @@ export class Game {
   }
 
   randomOpponentAttack() {
-    setTimeout(() => {
-      let x = Math.round(9 * Math.random());
-      let y = Math.round(9 * Math.random());
+    return new Promise((resolve)=>{
+      setTimeout(() => {
+        let x = Math.round(9 * Math.random());
+        let y = Math.round(9 * Math.random());
+  
+        while (this.player.gameboard.receivedAttacks[x][y]) {
+          x = Math.round(9 * Math.random());
+          y = Math.round(9 * Math.random());
+        }
+  
+        this.player.gameboard.receiveAttack(x, y);
+        renderBoard(this.player);
+        resolve();
+      }, 350);
 
-      while (this.player.gameboard.receivedAttacks[x][y]) {
-        x = Math.round(9 * Math.random());
-        y = Math.round(9 * Math.random());
-      }
-
-      this.player.gameboard.receiveAttack(x, y);
-      renderBoard(this.player);
-    }, 350);
+    })
   }
 
   checkWin() {
