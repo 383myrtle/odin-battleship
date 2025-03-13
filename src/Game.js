@@ -1,13 +1,13 @@
 import { Player } from "./Player.js";
 import { renderBoard } from "./DisplayController.js";
 import { handleAttack } from "./EventHandlers.js";
+import { opponentGrid } from "./DOMelements.js";
 
 export class Game {
   constructor(playerName) {
     this.player = new Player(playerName);
     this.opponent = new Player();
     this.initialize();
-    this.opponentGrid = document.querySelector(".opponent-board");
   }
 
   initialize() {
@@ -30,13 +30,12 @@ export class Game {
   }
 
   playerAttack() {
-    const grid = this.opponentGrid;
     const opp = this.opponent;
     
     return new Promise((resolve) => {
-      grid.addEventListener("click", function handler(e) {
+      opponentGrid.addEventListener("click", function handler(e) {
         handleAttack(e, opp);
-        grid.removeEventListener("click", handler);
+        opponentGrid.removeEventListener("click", handler);
         resolve();
       });
     });
