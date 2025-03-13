@@ -1,6 +1,6 @@
 import { renderBoard } from "./DisplayController.js";
 
-const handleAttacks = (e, opponent) => {
+const handleAttack = (e, opponent) => {
   try {
     const cell = e.target.closest(".cell");
     const x = parseInt(cell.dataset.x);
@@ -12,4 +12,4 @@ const handleAttacks = (e, opponent) => {
   }
 };
 
-export { handleAttacks };
+export { handleAttack };
