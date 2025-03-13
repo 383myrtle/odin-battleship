@@ -7,6 +7,7 @@ export class Game {
     this.player = new Player(playerName);
     this.opponent = new Player();
     this.initialize();
+    this.opponentGrid = document.querySelector(".opponent-board");
   }
 
   initialize() {
@@ -17,25 +18,25 @@ export class Game {
   }
 
   async start() {
-    const opponentGrid = document.querySelector(".opponent-board");
-
     let result = this.checkWin();
     while (!result.gameOver) {
-      await this.playerAttack(opponentGrid, this.opponent);
-      result = this.checkWin();
-      if (result.gameOver) {
-        break;
-      }
+      await this.playerAttack();
+      if (this.checkWin().gameOver){
+        break
+      };
       this.randomOpponentAttack();
       result = this.checkWin();
     }
   }
 
-  playerAttack(opponentGrid, opponent) {
+  playerAttack() {
+    const grid = this.opponentGrid;
+    const opp = this.opponent;
+    
     return new Promise((resolve) => {
-      opponentGrid.addEventListener("click", function handler(e) {
-        handleAttack(e, opponent);
-        opponentGrid.removeEventListener("click", handler);
+      grid.addEventListener("click", function handler(e) {
+        handleAttack(e, opp);
+        grid.removeEventListener("click", handler);
         resolve();
       });
     });
