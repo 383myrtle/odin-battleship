@@ -20,10 +20,10 @@ export class Game {
     const opponentGrid = document.querySelector(".opponent-board");
 
     let result = this.checkWin();
-    while (result === null) {
+    while (!result.gameOver) {
       await this.playerAttack(opponentGrid, this.opponent);
       result = this.checkWin();
-      if (result !== null) {
+      if (result.gameOver) {
         break;
       }
       this.randomOpponentAttack();
@@ -56,11 +56,19 @@ export class Game {
 
   checkWin() {
     if (this.player.gameboard.allShipsSunk()) {
-      return this.player;
+      return {
+        winner: this.player,
+        gameOver: true,
+      };
     }
     if (this.opponent.gameboard.allShipsSunk()) {
-      return this.opponent;
+      return {
+        winner: this.opponent,
+        gameOver: true,
+      };
     }
-    return null;
+    return {
+      gameOver: false,
+    };
   }
 }
