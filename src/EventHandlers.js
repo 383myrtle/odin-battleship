@@ -5,8 +5,9 @@ const handleAttack = (e, opponent) => {
     const cell = e.target.closest(".cell");
     const x = parseInt(cell.dataset.x);
     const y = parseInt(cell.dataset.y);
-    opponent.gameboard.receiveAttack(x, y);
+    const hit = opponent.gameboard.receiveAttack(x, y);
     renderBoard(opponent);
+    return hit;
   } catch (e) {
     console.log(e);
   }

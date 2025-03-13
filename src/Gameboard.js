@@ -120,8 +120,11 @@ export class Gameboard {
     this.validateCoords(x, y);
     if (this.board[x][y]) {
       this.board[x][y].hit();
+      this.receivedAttacks[x][y] = 1;
+      return true;
     }
     this.receivedAttacks[x][y] = 1;
+    return false;
   }
 
   allShipsSunk() {

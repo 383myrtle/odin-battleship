@@ -19,14 +19,20 @@ export class Game {
 
   async start() {
     let result = this.checkWin();
-    while (!result.gameOver) {
-      await this.playerAttack();
-      if (this.checkWin().gameOver) {
-        break;
-      }
-      await this.randomOpponentAttack();
+    outerloop: while (!result.gameOver) {
+      let data;
+      do {
+        data = await this.playerAttack();
+        result = this.checkWin();
+        if (result.gameOver) {
+          break outerloop;
+        }
+      } while (data);
+      
+      this.randomOpponentAttack();
       result = this.checkWin();
     }
+    console.log(result);
   }
 
   playerAttack() {
@@ -34,30 +40,34 @@ export class Game {
 
     return new Promise((resolve) => {
       opponentGrid.addEventListener("click", function handler(e) {
-        handleAttack(e, opp);
+        const hit = handleAttack(e, opp);
         opponentGrid.removeEventListener("click", handler);
-        resolve();
+        resolve(hit);
       });
     });
   }
 
-  randomOpponentAttack() {
-    return new Promise((resolve)=>{
-      setTimeout(() => {
-        let x = Math.round(9 * Math.random());
-        let y = Math.round(9 * Math.random());
-  
-        while (this.player.gameboard.receivedAttacks[x][y]) {
-          x = Math.round(9 * Math.random());
-          y = Math.round(9 * Math.random());
-        }
-  
-        this.player.gameboard.receiveAttack(x, y);
-        renderBoard(this.player);
-        resolve();
-      }, 350);
+  async randomOpponentAttack() {
+    let hit;
+    do {
+      await this.delay(350);
+      let x, y;
+      do {
+        x = Math.round(9 * Math.random());
+        y = Math.round(9 * Math.random());
+      } while (this.player.gameboard.receivedAttacks[x][y]);
 
-    })
+      hit = this.player.gameboard.receiveAttack(x, y);
+      renderBoard(this.player);
+    } while (hit);
+  }
+
+  delay(ms) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, ms);
+    });
   }
 
   checkWin() {
