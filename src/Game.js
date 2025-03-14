@@ -4,13 +4,9 @@ import { handleAttack } from "./EventHandlers.js";
 import { opponentGrid } from "./DOMelements.js";
 
 export class Game {
-  constructor(playerName) {
+  initialize(playerName) {
     this.player = new Player(playerName);
     this.opponent = new Player();
-    this.initialize();
-  }
-
-  initialize() {
     this.player.initializeRandomBoard();
     this.opponent.initializeRandomBoard();
     renderBoard(this.player);
@@ -28,7 +24,7 @@ export class Game {
           break outerloop;
         }
       } while (data);
-      
+
       this.randomOpponentAttack();
       result = this.checkWin();
     }
@@ -88,7 +84,7 @@ export class Game {
     };
   }
 
-  reshufflePlayer(){
+  reshufflePlayer() {
     this.player.initializeRandomBoard();
     renderBoard(this.player);
   }
