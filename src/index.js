@@ -6,6 +6,3 @@ import { setUpEventListeners } from "./DisplayController.js";
 
 const game = new Game();
 setUpEventListeners(game);
-reshuffleButton.addEventListener("click", () => {
-  game.reshufflePlayer();
-});

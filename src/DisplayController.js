@@ -51,9 +51,25 @@ const setUpEventListeners = (game) => {
     game.initialize(name);
     reshuffleButton.classList.remove("hidden");
     displayRules();
-    game.start();
+    addStartButton(game);
+  });
+  
+  reshuffleButton.addEventListener("click", () => {
+    if (!reshuffleButton.classList.contains("disabled")) {
+      game.reshufflePlayer();
+    }
   });
 };
+
+function addStartButton(game) {
+  const startButton = document.createElement("button");
+  startButton.textContent = "Start Game";
+  startButton.addEventListener("click", () => {
+    game.start();
+    reshuffleButton.classList.add("disabled");
+  });
+  gameInfo.appendChild(startButton);
+}
 
 function displayRules() {
   gameInfo.textContent = "";
