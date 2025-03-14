@@ -71,8 +71,16 @@ button {
   cursor: pointer;
 }
 
+#start-button{
+  background-color: #00FFFF;
+}
+
+#reshuffle{
+  background-color: #C8A2C8;
+}
+
 #reshuffle.disabled {
-  background-color: #c4c4c4;
+  background-color: #614558;
   color: #7a7a7a;
   cursor: not-allowed;
 }

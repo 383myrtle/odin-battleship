@@ -53,7 +53,7 @@ const setUpEventListeners = (game) => {
     displayRules();
     addStartButton(game);
   });
-  
+
   reshuffleButton.addEventListener("click", () => {
     if (!reshuffleButton.classList.contains("disabled")) {
       game.reshufflePlayer();
@@ -63,6 +63,7 @@ const setUpEventListeners = (game) => {
 
 function addStartButton(game) {
   const startButton = document.createElement("button");
+  startButton.id = "start-button";
   startButton.textContent = "Start Game";
   startButton.addEventListener("click", () => {
     game.start();
