@@ -44,6 +44,7 @@ function createCell(player, x, y) {
 
 const setUpEventListeners = (game) => {
   nameSubmitButton.addEventListener("click", (e) => {
+    e.preventDefault();
     const name = nameInput.value;
     nameInput.value = "";
     game.initialize(name);
