@@ -9,6 +9,7 @@ export class Player {
   }
 
   initializeRandomBoard() {
+    this.gameboard.clear();
     for (let i = 1; i < 6; i++) {
       const ship = new Ship(i);
       let coords = this.getRandomCoords();
