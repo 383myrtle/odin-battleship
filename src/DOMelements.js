@@ -3,6 +3,7 @@ const opponentGrid = document.querySelector(".opponent-board");
 const reshuffleButton = document.getElementById("reshuffle");
 const nameSubmitButton = document.getElementById("continue");
 const nameInput = document.getElementById("name");
+const gameInfo = document.querySelector(".game-info");
 
 export {
   playerGrid,
@@ -10,4 +11,5 @@ export {
   reshuffleButton,
   nameSubmitButton,
   nameInput,
+  gameInfo
 };

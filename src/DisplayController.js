@@ -4,6 +4,7 @@ import {
   nameSubmitButton,
   nameInput,
   reshuffleButton,
+  gameInfo,
 } from "./DOMelements.js";
 
 const gridMap = {
@@ -49,8 +50,28 @@ const setUpEventListeners = (game) => {
     nameInput.value = "";
     game.initialize(name);
     reshuffleButton.classList.remove("hidden");
+    displayRules();
     game.start();
   });
 };
+
+function displayRules() {
+  gameInfo.textContent = "";
+  const rulesInfo = document.createElement("div");
+  rulesInfo.classList.add("rules");
+  rulesInfo.innerHTML = `          
+          <h2>Rules</h2>
+          <ol>
+            <li>Each player has a 10x10 board.</li>
+            <li>Each player has 5 ships: Carrier (5), Battleship (4), Cruiser (3), Submarine (3), Destroyer (2).</li>
+            <li>Ships cannot overlap or be directly adjacent.</li>
+            <li>Ships cannot be placed diagonally.</li>
+            <li>Players take turns guessing the location of the opponent's ships.</li>
+            <li>When a player hits a ship, they get another turn.</li>
+            <li>The game ends when all of a player's ships are sunk.</li>
+          </ol>
+`;
+  gameInfo.appendChild(rulesInfo);
+}
 
 export { renderBoard, setUpEventListeners };
