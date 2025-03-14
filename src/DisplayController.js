@@ -48,6 +48,7 @@ const setUpEventListeners = (game) => {
     const name = nameInput.value;
     nameInput.value = "";
     game.initialize(name);
+    reshuffleButton.classList.remove("hidden");
     game.start();
   });
 };
