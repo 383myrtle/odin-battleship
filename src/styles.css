@@ -21,7 +21,10 @@
   width: 100%;
   padding: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 15px;
 }
 
 .player-board,
@@ -54,4 +57,19 @@
 
 .cell.hit {
     background-color: rgb(81, 230, 173)   ;
+}
+
+#reshuffle {
+  background-color: #f7f7f7;
+  color: #1f0322;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#reshuffle.disabled {
+  background-color: #c4c4c4;
+  color: #7a7a7a;
+  cursor: not-allowed;
 }

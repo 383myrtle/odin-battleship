@@ -87,4 +87,9 @@ export class Game {
       gameOver: false,
     };
   }
+
+  reshufflePlayer(){
+    this.player.initializeRandomBoard();
+    renderBoard(this.player);
+  }
 }
