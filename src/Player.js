@@ -8,10 +8,12 @@ export class Player {
     this.type = this.name === "Computer" ? "opponent" : "player";
   }
 
+  shipSizes = [2, 3, 3, 4, 5];
+
   initializeRandomBoard() {
     this.gameboard.clear();
-    for (let i = 1; i < 6; i++) {
-      const ship = new Ship(i);
+    this.shipSizes.forEach((size) => {
+      const ship = new Ship(size);
       let coords = this.getRandomCoords();
       let placed = false;
       while (!placed) {
@@ -22,7 +24,7 @@ export class Player {
           coords = this.getRandomCoords();
         }
       }
-    }
+    });
   }
 
   getRandomCoords() {
