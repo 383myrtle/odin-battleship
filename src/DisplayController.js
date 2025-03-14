@@ -1,4 +1,10 @@
-import { playerGrid, opponentGrid } from "./DOMelements.js";
+import {
+  playerGrid,
+  opponentGrid,
+  nameSubmitButton,
+  nameInput,
+  reshuffleButton,
+} from "./DOMelements.js";
 
 const gridMap = {
   player: playerGrid,
@@ -36,4 +42,13 @@ function createCell(player, x, y) {
   return cell;
 }
 
-export { renderBoard };
+const setUpEventListeners = (game) => {
+  nameSubmitButton.addEventListener("click", (e) => {
+    const name = nameInput.value;
+    nameInput.value = "";
+    game.initialize(name);
+    game.start();
+  });
+};
+
+export { renderBoard, setUpEventListeners };
