@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
 
 * {
   margin: 0;
@@ -7,9 +7,13 @@
   font-family: "Oswald", sans-serif;
 }
 
+body {
+  background-color: #1f0322;
+}
+
 #container {
   min-height: 100vh;
-  background-color: #1f0322;
+  height: 1px;
 }
 
 .main {
@@ -55,11 +59,11 @@
 }
 
 .cell.miss {
-    background-color: #a32d2d;
+  background-color: #a32d2d;
 }
 
 .cell.hit {
-    background-color: rgb(81, 230, 173)   ;
+  background-color: rgb(81, 230, 173);
 }
 
 button {
@@ -71,12 +75,12 @@ button {
   cursor: pointer;
 }
 
-#start-button{
-  background-color: #00FFFF;
+#start-button {
+  background-color: #00ffff;
 }
 
-#reshuffle{
-  background-color: #C8A2C8;
+#reshuffle {
+  background-color: #c8a2c8;
 }
 
 #reshuffle.disabled {
@@ -92,6 +96,7 @@ button {
   gap: 10px;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
 }
 
 form {
@@ -110,6 +115,6 @@ input {
   display: none;
 }
 
-h1{
+h1 {
   color: white;
 }
