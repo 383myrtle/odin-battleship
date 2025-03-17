@@ -67,8 +67,7 @@ const setUpEventListeners = (game) => {
     nameInput.value = "";
     game.initialize(name);
     mainContent.classList.remove("hidden");
-    displayRules();
-    addStartButton(game);
+    displayRules(game);
   });
 
   reshuffleButton.addEventListener("click", () => {
@@ -89,8 +88,9 @@ function addStartButton(game) {
   gameInfo.appendChild(startButton);
 }
 
-function displayRules() {
+function displayRules(game) {
   gameInfo.textContent = "";
+  addStartButton(game);
   const rulesInfo = document.createElement("div");
   rulesInfo.classList.add("rules");
   rulesInfo.innerHTML = `          
