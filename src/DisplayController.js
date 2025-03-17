@@ -114,7 +114,7 @@ const setTurn = (player) => {
 
 const setWinner = (player) => {
   turn.textContent = `${player.name} won the game!`;
-  gameMessage.textContent = "Plau again by pressing the button below";
+  gameMessage.textContent = "Play again by pressing the button below";
 };
 
 export { renderBoard, setUpEventListeners, setTurn, setWinner };
