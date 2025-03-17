@@ -8,6 +8,8 @@ import {
   mainContent,
   playerShipCount,
   opponentShipCount,
+  turn,
+  gameMessage,
 } from "./DOMelements.js";
 
 const elementMap = {
@@ -106,4 +108,13 @@ function displayRules() {
   gameInfo.appendChild(rulesInfo);
 }
 
-export { renderBoard, setUpEventListeners };
+const setTurn = (player) => {
+  turn.textContent = `${player.name}'s turn`;
+};
+
+const setWinner = (player) => {
+  turn.textContent = `${player.name} won the game!`;
+  gameMessage.textContent = "Plau again by pressing the button below";
+};
+
+export { renderBoard, setUpEventListeners, setTurn, setWinner };

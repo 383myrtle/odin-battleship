@@ -1,5 +1,5 @@
 import { Player } from "./Player.js";
-import { renderBoard } from "./DisplayController.js";
+import { renderBoard, setTurn, setWinner } from "./DisplayController.js";
 import { handleAttack } from "./EventHandlers.js";
 import { opponentGrid } from "./DOMelements.js";
 
@@ -17,6 +17,7 @@ export class Game {
     let result = this.checkWin();
     outerloop: while (!result.gameOver) {
       let data;
+      setTurn(this.player);
       do {
         data = await this.playerAttack();
         result = this.checkWin();
@@ -24,11 +25,12 @@ export class Game {
           break outerloop;
         }
       } while (data);
-
-      this.randomOpponentAttack();
+      setTurn(this.opponent);
+      await this.randomOpponentAttack();
       result = this.checkWin();
     }
     console.log(result);
+    setWinner(result.winner);
   }
 
   playerAttack() {
@@ -46,7 +48,7 @@ export class Game {
   async randomOpponentAttack() {
     let hit;
     do {
-      await this.delay(350);
+      await this.delay(500);
       let x, y;
       do {
         x = Math.round(9 * Math.random());
@@ -55,6 +57,7 @@ export class Game {
 
       hit = this.player.gameboard.receiveAttack(x, y);
       renderBoard(this.player);
+      return true;
     } while (hit);
   }
 

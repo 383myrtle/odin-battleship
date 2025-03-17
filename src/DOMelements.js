@@ -11,6 +11,8 @@ const playerShipCount = document.querySelector(
 const opponentShipCount = document.querySelector(
   ".opponent-container .ships-remaining",
 );
+const turn = document.querySelector(".turn");
+const gameMessage = document.querySelector(".message");
 
 export {
   playerGrid,
@@ -22,4 +24,6 @@ export {
   mainContent,
   playerShipCount,
   opponentShipCount,
+  turn,
+  gameMessage,
 };
