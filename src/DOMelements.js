@@ -5,6 +5,12 @@ const nameSubmitButton = document.getElementById("continue");
 const nameInput = document.getElementById("name");
 const gameInfo = document.querySelector(".game-info");
 const mainContent = document.querySelector(".main");
+const playerShipCount = document.querySelector(
+  ".player-container .ships-remaining",
+);
+const opponentShipCount = document.querySelector(
+  ".opponent-container .ships-remaining",
+);
 
 export {
   playerGrid,
@@ -14,4 +20,6 @@ export {
   nameInput,
   gameInfo,
   mainContent,
+  playerShipCount,
+  opponentShipCount,
 };

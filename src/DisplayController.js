@@ -6,15 +6,23 @@ import {
   reshuffleButton,
   gameInfo,
   mainContent,
+  playerShipCount,
+  opponentShipCount,
 } from "./DOMelements.js";
 
-const gridMap = {
-  player: playerGrid,
-  opponent: opponentGrid,
+const elementMap = {
+  player: {
+    grid: playerGrid,
+    shipCount: playerShipCount,
+  },
+  opponent: {
+    grid: opponentGrid,
+    shipCount: opponentShipCount,
+  },
 };
 
 const renderBoard = (player) => {
-  const grid = gridMap[player.type];
+  const grid = elementMap[player.type].grid;
   grid.textContent = "";
   for (let y = 9; y >= 0; y--) {
     for (let x = 0; x < 10; x++) {
@@ -22,6 +30,12 @@ const renderBoard = (player) => {
       grid.appendChild(cell);
     }
   }
+
+  const shipCount = elementMap[player.type].shipCount;
+  shipCount.textContent = player.gameboard.ships.reduce(
+    (acc, ship) => acc + (ship.isSunk() ? 0 : 1),
+    0,
+  );
 };
 
 function createCell(player, x, y) {
