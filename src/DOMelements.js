@@ -4,6 +4,7 @@ const reshuffleButton = document.getElementById("reshuffle");
 const nameSubmitButton = document.getElementById("continue");
 const nameInput = document.getElementById("name");
 const gameInfo = document.querySelector(".game-info");
+const mainContent = document.querySelector(".main");
 
 export {
   playerGrid,
@@ -11,5 +12,6 @@ export {
   reshuffleButton,
   nameSubmitButton,
   nameInput,
-  gameInfo
+  gameInfo,
+  mainContent,
 };

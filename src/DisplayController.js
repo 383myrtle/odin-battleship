@@ -5,6 +5,7 @@ import {
   nameInput,
   reshuffleButton,
   gameInfo,
+  mainContent,
 } from "./DOMelements.js";
 
 const gridMap = {
@@ -49,7 +50,7 @@ const setUpEventListeners = (game) => {
     const name = nameInput.value;
     nameInput.value = "";
     game.initialize(name);
-    reshuffleButton.classList.remove("hidden");
+    mainContent.classList.remove("hidden");
     displayRules();
     addStartButton(game);
   });
