@@ -76,6 +76,7 @@ function addStartButton() {
 }
 
 function displayRules() {
+  gameInfo.classList.remove("center");
   gameInfo.textContent = "";
   addStartButton();
   const rules = document.createElement("div");

@@ -131,3 +131,7 @@ h1 {
 .turn {
   font-size: 2rem;
 }
+
+.center {
+  height: 100vh;
+}
