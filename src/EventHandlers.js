@@ -1,4 +1,4 @@
-import { renderBoard, displayRules } from "./DisplayController.js";
+import { renderBoard, displayRules, show, hide } from "./DisplayController.js";
 import { game } from "./index.js";
 import {
   opponentGrid,
@@ -13,7 +13,7 @@ import {
 const handleGameStart = (e) => {
   game.start();
   reshuffleButton.classList.add("disabled");
-  e.target.classList.add("hidden");
+  hide(e.target);
 };
 
 const handleNameCapture = (e) => {
@@ -21,7 +21,7 @@ const handleNameCapture = (e) => {
   const name = nameInput.value;
   nameInput.value = "";
   game.initialize(name);
-  mainContent.classList.remove("hidden");
+  show(mainContent);
   displayRules(game);
 };
 
@@ -36,9 +36,9 @@ const handleReplay = () => {
   gameMessage.textContent = "";
   game.reset();
   reshuffleButton.classList.remove("disabled");
-  replayButton.classList.add("hidden");
+  hide(replayButton);
   const startButton = document.getElementById("start-button");
-  startButton.classList.remove("hidden");
+  show(startButton);
 };
 
 function handleAttack(opp) {

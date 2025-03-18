@@ -75,12 +75,12 @@ function addStartButton() {
   gameInfo.appendChild(startButton);
 }
 
-function displayRules(game) {
+function displayRules() {
   gameInfo.textContent = "";
   addStartButton();
-  const rulesInfo = document.createElement("div");
-  rulesInfo.classList.add("rules");
-  rulesInfo.innerHTML = `          
+  const rules = document.createElement("div");
+  rules.classList.add("rules");
+  rules.innerHTML = `          
           <h2>Rules</h2>
           <ol>
             <li>Each player has a 10x10 board.</li>
@@ -92,7 +92,7 @@ function displayRules(game) {
             <li>The game ends when all of a player's ships are sunk.</li>
           </ol>
 `;
-  gameInfo.appendChild(rulesInfo);
+  gameInfo.appendChild(rules);
 }
 
 const setTurn = (player) => {
@@ -108,7 +108,15 @@ const setTurn = (player) => {
 const setWinner = (player) => {
   turn.textContent = `${player.name} won the game!`;
   gameMessage.textContent = "Play again by pressing the button below";
-  replayButton.classList.remove("hidden");
+  show(replayButton);
 };
 
-export { renderBoard, displayRules, setUpEventListeners, setTurn, setWinner };
+function hide(element){
+  element.classList.add("hidden");
+}
+
+function show(element){
+  element.classList.remove("hidden");
+}
+
+export { renderBoard, displayRules, setUpEventListeners, setTurn, setWinner, show, hide };
