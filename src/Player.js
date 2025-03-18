@@ -11,7 +11,7 @@ export class Player {
   shipSizes = [2, 3, 3, 4, 5];
 
   initializeRandomBoard() {
-    this.gameboard.clear();
+    this.gameboard.initialize();
     this.shipSizes.forEach((size) => {
       const ship = new Ship(size);
       let coords = this.getRandomCoords();
