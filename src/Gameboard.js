@@ -1,30 +1,6 @@
 export class Gameboard {
   constructor() {
-    this.board = [
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-    ];
-    this.receivedAttacks = [
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    ];
-    this.ships = [];
+    this.initialize();
   }
 
   place(ship, start_x, start_y, orientation) {
@@ -71,7 +47,7 @@ export class Gameboard {
         }
         break;
       default:
-        throw new Error(`Error. Ship orientation ${orientation} not defined`);
+        throw this.orientationUndefinedError;
     }
   }
 
@@ -92,9 +68,7 @@ export class Gameboard {
             .slice(start_y, start_y + ship.length)
             .some((point) => point !== null)
         ) {
-          throw new Error(
-            "Error. Ship cannot overlap with already placed ship.",
-          );
+          throw this.shipOverlapError;
         }
         break;
       case "horizontal":
@@ -106,13 +80,11 @@ export class Gameboard {
             .slice(start_x, start_x + ship.length)
             .some((x) => x[start_y] !== null)
         ) {
-          throw new Error(
-            "Error. Ship cannot overlap with already placed ship.",
-          );
+          throw this.shipOverlapError;
         }
         break;
       default:
-        throw new Error(`Error. Ship orientation ${orientation} not defined`);
+        throw this.orientationUndefinedError;
     }
   }
 
@@ -137,7 +109,7 @@ export class Gameboard {
     }
   }
 
-  clear(){
+  initialize() {
     this.board = [
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
@@ -164,6 +136,10 @@ export class Gameboard {
     ];
     this.ships = [];
   }
-  
+
+  orientationUndefinedError = new Error("Error. Ship orientation not defined.");
+  shipOverlapError = new Error(
+    "Error. Ship cannot overlap with already placed ship.",
+  );
   outOfBoundsError = new Error("Error. Ship out of bounds of board");
 }
