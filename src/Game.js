@@ -53,8 +53,8 @@ export class Game {
 
       hit = this.player.gameboard.receiveAttack(x, y);
       renderBoard(this.player);
-      return true;
     } while (hit);
+    return;
   }
 
   delay(ms) {
