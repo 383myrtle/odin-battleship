@@ -83,6 +83,8 @@ const setUpEventListeners = (game) => {
     game.reset();
     reshuffleButton.classList.remove("disabled");
     replayButton.classList.add("hidden");
+    const startButton = document.getElementById("start-button");
+    startButton.classList.remove("hidden");
   });
 };
 
@@ -93,6 +95,7 @@ function addStartButton(game) {
   startButton.addEventListener("click", () => {
     game.start();
     reshuffleButton.classList.add("disabled");
+    startButton.classList.add("hidden");
   });
   gameInfo.appendChild(startButton);
 }
