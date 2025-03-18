@@ -87,6 +87,13 @@ export class Game {
     };
   }
 
+  reset() {
+    this.player.initializeRandomBoard();
+    this.opponent.initializeRandomBoard();
+    renderBoard(this.player);
+    renderBoard(this.opponent);
+  }
+
   reshufflePlayer() {
     this.player.initializeRandomBoard();
     renderBoard(this.player);

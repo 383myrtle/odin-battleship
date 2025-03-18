@@ -10,6 +10,7 @@ import {
   opponentShipCount,
   turn,
   gameMessage,
+  replayButton,
 } from "./DOMelements.js";
 
 const elementMap = {
@@ -75,6 +76,14 @@ const setUpEventListeners = (game) => {
       game.reshufflePlayer();
     }
   });
+
+  replayButton.addEventListener("click", () => {
+    turn.textContent = "";
+    gameMessage.textContent = "";
+    game.reset();
+    reshuffleButton.classList.remove("disabled");
+    replayButton.classList.add("hidden");
+  });
 };
 
 function addStartButton(game) {
@@ -110,11 +119,18 @@ function displayRules(game) {
 
 const setTurn = (player) => {
   turn.textContent = `${player.name}'s turn`;
+  if (player.type === "player") {
+    gameMessage.textContent =
+      "Click a square on the opponent's board to attack!";
+  } else {
+    gameMessage.textContent = "";
+  }
 };
 
 const setWinner = (player) => {
   turn.textContent = `${player.name} won the game!`;
   gameMessage.textContent = "Play again by pressing the button below";
+  replayButton.classList.remove("hidden");
 };
 
 export { renderBoard, setUpEventListeners, setTurn, setWinner };

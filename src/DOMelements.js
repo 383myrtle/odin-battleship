@@ -13,6 +13,7 @@ const opponentShipCount = document.querySelector(
 );
 const turn = document.querySelector(".turn");
 const gameMessage = document.querySelector(".message");
+const replayButton = document.getElementById("replay");
 
 export {
   playerGrid,
@@ -26,4 +27,5 @@ export {
   opponentShipCount,
   turn,
   gameMessage,
+  replayButton,
 };
