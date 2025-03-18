@@ -1,7 +1,6 @@
 import { Player } from "./Player.js";
 import { renderBoard, setTurn, setWinner } from "./DisplayController.js";
 import { handleAttack } from "./EventHandlers.js";
-import { opponentGrid } from "./DOMelements.js";
 
 export class Game {
   initialize(playerName) {
@@ -15,16 +14,13 @@ export class Game {
 
   async start() {
     let result = this.checkWin();
-    outerloop: while (!result.gameOver) {
-      let data;
+    while (!result.gameOver) {
+      // Wait for player to attack and check if game over
       setTurn(this.player);
-      do {
-        data = await this.playerAttack();
-        result = this.checkWin();
-        if (result.gameOver) {
-          break outerloop;
-        }
-      } while (data);
+      await this.playerAttack();
+      result = this.checkWin();
+
+      // Wait for opponent to attack and check if game over
       setTurn(this.opponent);
       await this.randomOpponentAttack();
       result = this.checkWin();
@@ -33,16 +29,16 @@ export class Game {
     setWinner(result.winner);
   }
 
-  playerAttack() {
-    const opp = this.opponent;
-
-    return new Promise((resolve) => {
-      opponentGrid.addEventListener("click", function handler(e) {
-        const hit = handleAttack(e, opp);
-        opponentGrid.removeEventListener("click", handler);
-        resolve(hit);
-      });
-    });
+  async playerAttack() {
+    // If player lands attack, let them attack again
+    let attackLanded;
+    do {
+      attackLanded = await handleAttack(this.opponent);
+      const result = this.checkWin();
+      if (result.gameOver) {
+        return;
+      }
+    } while (attackLanded);
   }
 
   async randomOpponentAttack() {
