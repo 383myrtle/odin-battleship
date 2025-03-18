@@ -19,6 +19,9 @@ export class Game {
       setTurn(this.player);
       await this.playerAttack();
       result = this.checkWin();
+      if (result.gameOver){
+        break;
+      }
 
       // Wait for opponent to attack and check if game over
       setTurn(this.opponent);
