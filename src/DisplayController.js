@@ -2,16 +2,15 @@ import {
   playerGrid,
   opponentGrid,
   nameSubmitButton,
-  nameInput,
   reshuffleButton,
   gameInfo,
-  mainContent,
   playerShipCount,
   opponentShipCount,
   turn,
   gameMessage,
   replayButton,
 } from "./DOMelements.js";
+import { handleGameStart, handleNameCapture, handleReplay, handleReshuffle } from "./EventHandlers.js";
 
 const elementMap = {
   player: {
@@ -25,6 +24,7 @@ const elementMap = {
 };
 
 const renderBoard = (player) => {
+  // Create grid from player gameboard
   const grid = elementMap[player.type].grid;
   grid.textContent = "";
   for (let y = 9; y >= 0; y--) {
@@ -34,6 +34,7 @@ const renderBoard = (player) => {
     }
   }
 
+  // Display remaining ship count
   const shipCount = elementMap[player.type].shipCount;
   shipCount.textContent = player.gameboard.ships.reduce(
     (acc, ship) => acc + (ship.isSunk() ? 0 : 1),
@@ -56,53 +57,27 @@ function createCell(player, x, y) {
     } else {
       cell.classList.add("miss");
     }
-    cell.textContent = "X";
   }
   return cell;
 }
 
-const setUpEventListeners = (game) => {
-  nameSubmitButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    const name = nameInput.value;
-    nameInput.value = "";
-    game.initialize(name);
-    mainContent.classList.remove("hidden");
-    displayRules(game);
-  });
-
-  reshuffleButton.addEventListener("click", () => {
-    if (!reshuffleButton.classList.contains("disabled")) {
-      game.reshufflePlayer();
-    }
-  });
-
-  replayButton.addEventListener("click", () => {
-    turn.textContent = "";
-    gameMessage.textContent = "";
-    game.reset();
-    reshuffleButton.classList.remove("disabled");
-    replayButton.classList.add("hidden");
-    const startButton = document.getElementById("start-button");
-    startButton.classList.remove("hidden");
-  });
+const setUpEventListeners = () => {
+  nameSubmitButton.addEventListener("click", handleNameCapture);
+  reshuffleButton.addEventListener("click", handleReshuffle);
+  replayButton.addEventListener("click", handleReplay);
 };
 
-function addStartButton(game) {
+function addStartButton() {
   const startButton = document.createElement("button");
   startButton.id = "start-button";
   startButton.textContent = "Start Game";
-  startButton.addEventListener("click", () => {
-    game.start();
-    reshuffleButton.classList.add("disabled");
-    startButton.classList.add("hidden");
-  });
+  startButton.addEventListener("click", handleGameStart);
   gameInfo.appendChild(startButton);
 }
 
 function displayRules(game) {
   gameInfo.textContent = "";
-  addStartButton(game);
+  addStartButton();
   const rulesInfo = document.createElement("div");
   rulesInfo.classList.add("rules");
   rulesInfo.innerHTML = `          
@@ -136,4 +111,4 @@ const setWinner = (player) => {
   replayButton.classList.remove("hidden");
 };
 
-export { renderBoard, setUpEventListeners, setTurn, setWinner };
+export { renderBoard, displayRules, setUpEventListeners, setTurn, setWinner };

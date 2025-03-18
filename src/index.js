@@ -4,4 +4,6 @@ import { Game } from "./Game.js";
 import { setUpEventListeners } from "./DisplayController.js";
 
 const game = new Game();
-setUpEventListeners(game);
+setUpEventListeners();
+
+export { game };
