@@ -4,6 +4,8 @@
 
 This is a browser-based implementation of the game of Battleship built for the [Battleship project of the Odin Project course](https://www.theodinproject.com/lessons/node-path-javascript-battleship). The game allows a player to place ships on a grid and compete against a computer opponent that makes random attacks. The game logic and UI are modularized to ensure separation of concerns and maintainability.
 
+View the project [here](https://383myrtle.github.io/odin-battleship/).
+
 ## Features
 
 - Randomized ship placement for both the player and the computer opponent.
